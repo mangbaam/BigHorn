@@ -1,12 +1,15 @@
 package mangbaam.practice.parkingfree
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import mangbaam.practice.parkingfree.databinding.ItemCampingBinding
 import mangbaam.practice.parkingfree.dto.SimpleCamping
+import mangbaam.practice.parkingfree.util.Constants.TAG
 
 class CampingListAdapter :
     ListAdapter<SimpleCamping, CampingListAdapter.CampingViewHolder>(diffUtil) {
@@ -15,7 +18,14 @@ class CampingListAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: SimpleCamping) {
             binding.data = data
+
+            Log.d(TAG, "CampingViewHolder - bind() called / image: ${data.thumbnail}")
+
+            Glide.with(binding.ivThumbnail.context)
+                .load(data.thumbnail)
+                .into(binding.ivThumbnail)
             binding.executePendingBindings()
+
         }
     }
 

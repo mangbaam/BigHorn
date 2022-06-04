@@ -27,7 +27,8 @@ data class Camping(
             contentId = contentId,
             name = name,
             doNm= doNm,
-            sigunguNm, sigunguNm,
+            sigunguNm = sigunguNm,
+            thumbnail = thumbnail,
             category = category
         )
     }

@@ -17,9 +17,9 @@
 
         <ImageView
             android:id="@+id/iv_thumbnail"
-            glide="@{data.thumbnail}"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            imageUrl="@{data.thumbnail}"
             android:contentDescription="@string/description_camping_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
