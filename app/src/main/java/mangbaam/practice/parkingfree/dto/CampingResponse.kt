@@ -24,5 +24,5 @@ data class Body(
 ): Serializable
 
 data class Items(
-    val item: List<Camping>
+    val item: List<Camping>?
 ): Serializable

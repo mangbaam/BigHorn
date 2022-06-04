@@ -19,9 +19,8 @@ class CampingRemoteDataSource(private val apiService: Network) {
     }
 
     suspend fun getSearchedCampingList(page: Int? = 1, keyword: String): CampingResponse {
-        val encodedKeyword = keyword.toByteArray(Charsets.UTF_8)
         return apiService.getSearchList(
-            page, KEY_NUMS_OF_ROWS, ANDROID, APP_NAME, Api.KEY, encodedKeyword, "json"
+            page, KEY_NUMS_OF_ROWS, ANDROID, APP_NAME, Api.KEY, keyword, "json"
         )
     }
 }

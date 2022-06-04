@@ -45,7 +45,7 @@ interface Network {
         @Query("MobileOS") os: String,
         @Query("MobileApp") appName: String,
         @Query("serviceKey") key: String,
-        @Query("keyword") keyword: ByteArray,
+        @Query("keyword") keyword: String,
         @Query("_type") type: String,
     ): CampingResponse
 

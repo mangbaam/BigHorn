@@ -14,11 +14,11 @@ data class Camping(
     @SerializedName("induty") val category: String, // 업종
     val doNm: String, // 도
     val sigunguNm: String, // 시군구
-    val zipcode: Int, // 우편번호
+    val zipcode: String, // 우편번호
     val addr1: String, // 주소
     val addr2: String, // 주소 상세
-    val mapX: String, // 경도(X)
-    val mapY: String, // 위도(Y)
+    val mapX: Double, // 경도(X)
+    val mapY: Double, // 위도(Y)
     val tel: String,
     @SerializedName("firstImageUrl") val thumbnail: String, // 대표 이미지
 ):Serializable {
