@@ -1,10 +1,9 @@
 package mangbaam.practice.parkingfree.dto
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Camping(
-    val resultCode: Int,
-    val resultMsg: String,
     val numsOfRows: Int,
     val pageNo: Int,
     val totalCount: Int,
@@ -12,7 +11,7 @@ data class Camping(
     @SerializedName("facltNm") val name: String?, // 야영장 명
     val lineIntro: String?,
     val intro: String?,
-    val induty: String, // 업종
+    @SerializedName("induty") val category: String, // 업종
     val doNm: String, // 도
     val sigunguNm: String, // 시군구
     val zipcode: Int, // 우편번호
@@ -21,5 +20,15 @@ data class Camping(
     val mapX: String, // 경도(X)
     val mapY: String, // 위도(Y)
     val tel: String,
-    val firstImageUrl: String // 대표이미지
-)
+    @SerializedName("firstImageUrl") val thumbnail: String, // 대표 이미지
+):Serializable {
+    fun toSimple(): SimpleCamping {
+        return SimpleCamping(
+            contentId = contentId,
+            name = name,
+            doNm= doNm,
+            sigunguNm, sigunguNm,
+            category = category
+        )
+    }
+}

@@ -8,16 +8,25 @@ import androidx.recyclerview.widget.RecyclerView
 import mangbaam.practice.parkingfree.databinding.ItemCampingBinding
 import mangbaam.practice.parkingfree.dto.SimpleCamping
 
-class CampingListAdapter: ListAdapter<SimpleCamping, CampingListAdapter.CampingViewHolder>(diffUtil) {
+class CampingListAdapter :
+    ListAdapter<SimpleCamping, CampingListAdapter.CampingViewHolder>(diffUtil) {
 
-    class CampingViewHolder(binding: ItemCampingBinding): RecyclerView.ViewHolder(binding.root) {
+    class CampingViewHolder(private val binding: ItemCampingBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(data: SimpleCamping) {
-
+            binding.data = data
+            binding.executePendingBindings()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CampingViewHolder {
-        return CampingViewHolder(ItemCampingBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return CampingViewHolder(
+            ItemCampingBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: CampingViewHolder, position: Int) {
@@ -25,12 +34,15 @@ class CampingListAdapter: ListAdapter<SimpleCamping, CampingListAdapter.CampingV
     }
 
     companion object {
-        val diffUtil = object: DiffUtil.ItemCallback<SimpleCamping>() {
+        val diffUtil = object : DiffUtil.ItemCallback<SimpleCamping>() {
             override fun areItemsTheSame(oldItem: SimpleCamping, newItem: SimpleCamping): Boolean {
                 return oldItem.contentId == newItem.contentId
             }
 
-            override fun areContentsTheSame(oldItem: SimpleCamping, newItem: SimpleCamping): Boolean {
+            override fun areContentsTheSame(
+                oldItem: SimpleCamping,
+                newItem: SimpleCamping
+            ): Boolean {
                 return oldItem == newItem
             }
         }

@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
-import mangbaam.practice.parkingfree.dto.Camping
+import mangbaam.practice.parkingfree.dto.CampingResponse
 import mangbaam.practice.parkingfree.util.Api
 import mangbaam.practice.parkingfree.util.Api.BASE_URL
 import mangbaam.practice.parkingfree.util.Constants.TAG
@@ -15,9 +15,11 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
 import org.json.JSONObject
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 import java.lang.reflect.Type
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -27,10 +29,25 @@ import java.time.format.DateTimeFormatter
 interface Network {
 
     @GET(Api.BASED_LIST)
-    fun getBaseList(): List<Camping>
+    suspend fun getBaseList(
+        @Query("pageNo") page: Int?,
+        @Query("numOfRows") numOfRows: Int?,
+        @Query("MobileOS") os: String,
+        @Query("MobileApp") appName: String,
+        @Query("serviceKey") key: String,
+        @Query("_type") type: String,
+    ): CampingResponse
 
     @GET(Api.SEARCH_LIST)
-    fun getSearchList(keyword: String): List<Camping>
+    suspend fun getSearchList(
+        @Query("pageNo") page: Int?,
+        @Query("numOfRows") numOfRows: Int?,
+        @Query("MobileOS") os: String,
+        @Query("MobileApp") appName: String,
+        @Query("serviceKey") key: String,
+        @Query("keyword") keyword: ByteArray,
+        @Query("_type") type: String,
+    ): CampingResponse
 
     companion object {
         private var retrofitService: Network? = null
@@ -99,6 +116,7 @@ interface Network {
                         return LocalTime.parse(json?.asString, DateTimeFormatter.ofPattern("HH:mm:ss"))
                     }
                 })
+                .setLenient()
                 .create()
             return GsonConverterFactory.create(gson)
         }

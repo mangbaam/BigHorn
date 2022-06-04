@@ -3,4 +3,5 @@
     <string name="hint_search_edittext">키워드로 검색</string>
     <string name="camping_place">캠핑장</string>
     <string name="description_camping_image">camping thumbnail</string>
+    <string name="list_count_text">목록 개수: %d개</string>
 </resources>
