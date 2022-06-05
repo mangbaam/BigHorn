@@ -2,13 +2,11 @@ package mangbaam.practice.parkingfree
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import mangbaam.practice.parkingfree.databinding.ActivityMainBinding
-import mangbaam.practice.parkingfree.util.Constants.TAG
 import mangbaam.practice.parkingfree.util.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
@@ -35,9 +33,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.etSearch.setOnEditorActionListener { _, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH || keyEvent.action == KeyEvent.ACTION_DOWN) {
+                viewModel.page.value = 1
+                viewModel.searchMode.value = true
                 viewModel.getSearchList()
             }
             true
+        }
+
+        viewModel.keyword.observe(this) {
+            viewModel.searchMode.value = it.isBlank()
+            viewModel.page.value = 1
         }
     }
 }

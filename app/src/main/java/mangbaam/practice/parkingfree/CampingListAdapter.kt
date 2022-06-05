@@ -19,8 +19,6 @@ class CampingListAdapter :
         fun bind(data: SimpleCamping) {
             binding.data = data
 
-            Log.d(TAG, "CampingViewHolder - bind() called / image: ${data.thumbnail}")
-
             Glide.with(binding.ivThumbnail.context)
                 .load(data.thumbnail)
                 .into(binding.ivThumbnail)

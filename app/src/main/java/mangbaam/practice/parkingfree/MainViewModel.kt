@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mangbaam.practice.parkingfree.dto.Camping
+import mangbaam.practice.parkingfree.util.Constants.TAG
 
 class MainViewModel(private val repository: CampingRepository) : ViewModel() {
     private val _campingList = MutableLiveData<List<Camping>>()
@@ -14,7 +15,8 @@ class MainViewModel(private val repository: CampingRepository) : ViewModel() {
     val keyword = MutableLiveData<String>()
     val count = MutableLiveData(0)
     val progress = MutableLiveData(false)
-    private val page = MutableLiveData(1)
+    val page = MutableLiveData(1)
+    val searchMode = MutableLiveData(false)
 
     init {
         getBaseList()
@@ -24,7 +26,9 @@ class MainViewModel(private val repository: CampingRepository) : ViewModel() {
         viewModelScope.launch {
             progress.postValue(true)
             val response = repository.getBaseList(page.value).response
-            _campingList.postValue(response.body.items.item ?: emptyList())
+            response.body.items ?: return@launch
+            _campingList.postValue(response.body.items.item?: return@launch)
+
             count.postValue(response.body.totalCount)
             progress.postValue(false)
         }
@@ -34,8 +38,10 @@ class MainViewModel(private val repository: CampingRepository) : ViewModel() {
         viewModelScope.launch {
             progress.postValue(true)
             val k = keyword.value ?: return@launch
-            val response = repository.getKeywordList(1, k).response
-            _campingList.postValue(response.body.items.item ?: emptyList())
+            val response = repository.getKeywordList(page.value, k).response
+            response.body.items ?: return@launch
+            Log.d(TAG, "MainViewModel - getSearchList() called / $response")
+            _campingList.postValue(response.body.items.item?: return@launch)
             progress.postValue(false)
         }
         progress.value = false
