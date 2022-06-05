@@ -1,5 +1,6 @@
 package mangbaam.practice.parkingfree
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
@@ -7,7 +8,9 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import mangbaam.practice.parkingfree.databinding.ActivityMainBinding
+import mangbaam.practice.parkingfree.util.Constants.KEY_CAMPING_DETAIL
 import mangbaam.practice.parkingfree.util.ViewModelFactory
+import mangbaam.practice.parkingfree.util.repeatOnStarted
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -42,6 +45,16 @@ class MainActivity : AppCompatActivity() {
         viewModel.keyword.observe(this) {
             viewModel.searchMode.value = it.isBlank()
             viewModel.page.value = 1
+        }
+
+        repeatOnStarted {
+            viewModel.selectedCamping.collect { event ->
+                if (event is MainViewModel.Event.CampingClickEvent) {
+                    val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                    intent.putExtra(KEY_CAMPING_DETAIL, event.camping)
+                    startActivity(intent)
+                }
+            }
         }
     }
 }

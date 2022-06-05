@@ -5,4 +5,5 @@ object Constants {
     const val KEY_NUMS_OF_ROWS = 100
     const val APP_NAME = "BigHorn"
     const val ANDROID = "AND"
+    const val KEY_CAMPING_DETAIL = "moveToDetailPage"
 }

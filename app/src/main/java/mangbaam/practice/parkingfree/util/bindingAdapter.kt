@@ -1,5 +1,6 @@
 package mangbaam.practice.parkingfree.util
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
@@ -21,7 +22,10 @@ fun applySimpleAddress(view: TextView, addr: String) {
     view.text = addr
 }
 
-@BindingAdapter("address1, address2")
-fun applyAddress(view: TextView, addr1: String, addr2: String) {
-    view.text = addr1 + addr2
+@BindingAdapter("address1", "address2")
+fun applyAddress(view: TextView, addr1: String?, addr2: String?) {
+    val a1 = addr1 ?: ""
+    val a2 = addr2 ?: ""
+    if (a1.isEmpty() && a2.isEmpty()) view.visibility = View.GONE
+    else view.text = a1 + a2
 }

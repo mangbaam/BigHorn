@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import mangbaam.practice.parkingfree.dto.Camping
 import mangbaam.practice.parkingfree.util.Constants.TAG
@@ -18,8 +20,8 @@ class MainViewModel(private val repository: CampingRepository) : ViewModel() {
     val page = MutableLiveData(1)
     val searchMode = MutableLiveData(false)
 
-    private val _selectedCamping = MutableLiveData<Camping?>()
-    val selectedCamping: LiveData<Camping?> = _selectedCamping
+    private val _selectedCamping = MutableSharedFlow<Event>()
+    val selectedCamping = _selectedCamping.asSharedFlow()
 
     init {
         getBaseList()
@@ -51,6 +53,16 @@ class MainViewModel(private val repository: CampingRepository) : ViewModel() {
     }
 
     fun onItemClicked(camping: Camping) {
-        _selectedCamping.value = camping
+        event(Event.CampingClickEvent(camping))
+    }
+
+    private fun event(event: Event) {
+        viewModelScope.launch {
+            _selectedCamping.emit(event)
+        }
+    }
+
+    sealed class Event {
+        data class CampingClickEvent(val camping: Camping) : Event()
     }
 }

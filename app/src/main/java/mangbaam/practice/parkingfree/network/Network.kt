@@ -9,13 +9,12 @@ import mangbaam.practice.parkingfree.dto.CampingResponse
 import mangbaam.practice.parkingfree.util.Api
 import mangbaam.practice.parkingfree.util.Api.BASE_URL
 import mangbaam.practice.parkingfree.util.Constants.TAG
-import mangbaam.practice.parkingfree.util.extension.String.isJsonArray
-import mangbaam.practice.parkingfree.util.extension.String.isJsonObject
+import mangbaam.practice.parkingfree.util.isJsonArray
+import mangbaam.practice.parkingfree.util.isJsonObject
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
 import org.json.JSONObject
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

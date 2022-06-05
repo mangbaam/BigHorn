@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="mangbaam.practice.parkingfree.dto.Camping" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C65E8852"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            tools:context=".DetailActivity">
+
+            <TextView
+                android:id="@+id/tv_camping_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:text="@{data.name}"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="만리포몰디브" />
+
+            <TextView
+                android:id="@+id/tv_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{data.category}"
+                android:textColor="#5A22F8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_camping_name"
+                tools:text="일반 야영장" />
+
+            <TextView
+                android:id="@+id/tv_feature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@{data.feature}"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_category"
+                tools:text="천주산의 계곡이 좋고 도심과 가까움" />
+
+            <TextView
+                android:id="@+id/tv_line_intro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_grey_solid_corner"
+                android:padding="16dp"
+                android:text="@{data.lineIntro}"
+                android:textColor="#222"
+                android:visibility="@{data.lineIntro!=null?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_feature"
+                tools:text="한줄소개	발 아래로 내려다보는 풍경이 일품" />
+
+            <LinearLayout
+                android:id="@+id/layout_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_grey_solid_corner"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_line_intro">
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.tel}"
+                    android:textColor="#222"
+                    tools:text="010-1234-1234" />
+
+                <TextView
+                    address1="@{data.addr1}"
+                    address2="@{data.addr2}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#0043CA"
+                    tools:text="광주 광산구 첨단중앙로" />
+
+                <TextView
+                    android:id="@+id/tv_reserveUrl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{data.reservation}"
+                    android:textColor="#00F"
+                    tools:text="http://r6.camperstory.com/?1789" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_info2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_grey_solid_corner"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_info">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.equipment}"
+                    android:textColor="@color/black"
+                    tools:text="텐트,화로대,난방기구,식기,침낭" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.boodae}"
+                    android:textColor="@color/black"
+                    tools:text="전기,무선인터넷,장작판매,온수,놀이터,운동시설" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.elseBoodae}"
+                    android:textColor="@color/black"
+                    tools:text="어란아 놀이기구 소�" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.enjoy}"
+                    android:textColor="@color/black"
+                    tools:text="어란아 놀이기구 소�" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.enjoyElse}"
+                    android:textColor="@color/black"
+                    tools:text="어란아 놀이기구 소�" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_intro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_grey_solid_corner"
+                android:padding="16dp"
+                android:text="@{data.intro}"
+                android:textColor="@color/black"
+                android:visibility="@{data.intro!=null?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_info2"
+                tools:text="한줄소개	발 아래로 내려다보는 풍경이 일품한줄소개	발 아래로 내려다보는 풍경이 일품한줄소개	발 아래로 내려다보는 풍경이 일품한줄소개	발 아래로 내려다보는 풍경이 일품" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
