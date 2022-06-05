@@ -7,12 +7,16 @@
 
         <variable
             name="data"
-            type="mangbaam.practice.parkingfree.dto.SimpleCamping" />
+            type="mangbaam.practice.parkingfree.dto.Camping" />
+        <variable
+            name="vm"
+            type="mangbaam.practice.parkingfree.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:padding="8dp"
+        android:onClick="@{() -> vm.onItemClicked(data)}"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -55,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
+            simpleAddress="@{data.addr1}"
             app:layout_constraintStart_toEndOf="@id/iv_thumbnail"
             app:layout_constraintTop_toBottomOf="@id/tv_category"
             tools:text="광주 광산구 수완로 어쩌고 저쩌고" />

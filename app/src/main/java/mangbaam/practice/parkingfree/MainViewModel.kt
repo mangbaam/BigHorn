@@ -18,6 +18,9 @@ class MainViewModel(private val repository: CampingRepository) : ViewModel() {
     val page = MutableLiveData(1)
     val searchMode = MutableLiveData(false)
 
+    private val _selectedCamping = MutableLiveData<Camping?>()
+    val selectedCamping: LiveData<Camping?> = _selectedCamping
+
     init {
         getBaseList()
     }
@@ -45,5 +48,9 @@ class MainViewModel(private val repository: CampingRepository) : ViewModel() {
             progress.postValue(false)
         }
         progress.value = false
+    }
+
+    fun onItemClicked(camping: Camping) {
+        _selectedCamping.value = camping
     }
 }

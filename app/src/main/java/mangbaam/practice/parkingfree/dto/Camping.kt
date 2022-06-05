@@ -21,15 +21,4 @@ data class Camping(
     val mapY: Double, // 위도(Y)
     val tel: String,
     @SerializedName("firstImageUrl") val thumbnail: String, // 대표 이미지
-):Serializable {
-    fun toSimple(): SimpleCamping {
-        return SimpleCamping(
-            contentId = contentId,
-            name = name,
-            doNm= doNm,
-            sigunguNm = sigunguNm,
-            thumbnail = thumbnail,
-            category = category
-        )
-    }
-}
+):Serializable

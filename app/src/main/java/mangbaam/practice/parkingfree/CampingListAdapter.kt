@@ -8,22 +8,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import mangbaam.practice.parkingfree.databinding.ItemCampingBinding
-import mangbaam.practice.parkingfree.dto.SimpleCamping
-import mangbaam.practice.parkingfree.util.Constants.TAG
+import mangbaam.practice.parkingfree.dto.Camping
 
-class CampingListAdapter :
-    ListAdapter<SimpleCamping, CampingListAdapter.CampingViewHolder>(diffUtil) {
+class CampingListAdapter(private val viewModel: MainViewModel) : ListAdapter<Camping, CampingListAdapter.CampingViewHolder>(diffUtil) {
 
-    class CampingViewHolder(private val binding: ItemCampingBinding) :
+    inner class CampingViewHolder(private val binding: ItemCampingBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: SimpleCamping) {
+        fun bind(data: Camping) {
             binding.data = data
-
-            Glide.with(binding.ivThumbnail.context)
-                .load(data.thumbnail)
-                .into(binding.ivThumbnail)
-            binding.executePendingBindings()
-
+            binding.vm = viewModel
         }
     }
 
@@ -42,14 +35,14 @@ class CampingListAdapter :
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<SimpleCamping>() {
-            override fun areItemsTheSame(oldItem: SimpleCamping, newItem: SimpleCamping): Boolean {
+        val diffUtil = object : DiffUtil.ItemCallback<Camping>() {
+            override fun areItemsTheSame(oldItem: Camping, newItem: Camping): Boolean {
                 return oldItem.contentId == newItem.contentId
             }
 
             override fun areContentsTheSame(
-                oldItem: SimpleCamping,
-                newItem: SimpleCamping
+                oldItem: Camping,
+                newItem: Camping
             ): Boolean {
                 return oldItem == newItem
             }
